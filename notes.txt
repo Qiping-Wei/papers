@@ -1,0 +1,112 @@
+have a project, and want to push it to a Github repository.
+
+1, create a Github repository: papers (Github account)
+
+2, Add the GitHub repo as a remote reference for the existing project.(git bash)
+
+git remote add origin https://github.com/Qiping-Wei/papers.git
+
+==$ git remote add origin https://github.com/Qiping-Wei/papers.git
+fatal: remote origin already exists.
+==
+
+git remote add mian https://github.com/Qiping-Wei/papers.git
+
+==$ git push -u -f main b1
+remote: Permission to Qiping-Wei/papers.git denied to Qiana0223.
+fatal: unable to access 'https://github.com/Qiping-Wei/papers.git/': The requested URL returned error: 403
+==
+
+
+# generate ssh keys
+ssh-keygen -t ed25519 -C "isctae@gmail.com"
+eval `ssh-agent -s`
+ssh-add
+==
+$ eval `ssh-agent -s`
+Agent pid 1716
+==
+==$ ssh-add
+Identity added: /c/Users/18178/.ssh/id_rsa (qipingwei0223@163.com)( generated before)
+Identity added: /c/Users/18178/.ssh/id_ed25519 (isctae@gmail.com)
+==
+
+ssh-add C:\Users\18178/.ssh/id_ed25519
+
+==$ ssh-add C:\Users\18178/.ssh/id_ed25519
+Could not open a connection to your authentication agent.
+==
+
+
+git config --global user.name "qiping"
+git config --global user.email "isctae@gmail.com"
+git config -l
+
+ssh -T Qiping-Wei@github.com
+==
+$ ssh -T Qiping-Wei@github.com
+Qiping-Wei@github.com: Permission denied (publickey).
+==
+
+ssh -vT Qiping-Wei@github.com
+
+==
+$ ssh-add ~/.ssh/id_ed25519
+Identity added: /c/Users/18178/.ssh/id_ed25519 (isctae@gmail.com)
+==
+
+git config --global user.name "qiping"
+git config --global user.email "isctae@gmail.com"
+git config -l
+
+
+git push -u -f main papers
+
+
+
+git remote set-url main  git@github.com:Qiping-Wei/papers.git  
+
+
+
+Execute git config --list to check current username & email in your local repo.
+
+git config [--global] user.name "Full Name"
+git config [--global] user.email "email@address.com"
+
+change .git/config file to change user name
+	vi .git/confg
+	enter insert mode:i
+	exit with saving: esc :wq
+	exit without saving: esc :q!
+
+default name is in file: ~/gitconfig file
+
+https://stackoverflow.com/questions/22844806/how-to-change-my-git-username-in-terminal
+
+changing the git user does solve the problem:
+==
+$ git push -u -f main b1
+remote: Permission to Qiping-Wei/papers.git denied to Qiana0223.
+fatal: unable to access 'https://github.com/Qiping-Wei/papers.git/': The requested URL returned error: 403
+==
+
+
+How to setup multiple ssh keys:
+
+
+
+eval `ssh-agent -s`
+ssh-add -K ~/.ssh/id_ed25519
+
+
+
+https://stackoverflow.com/questions/4220416/can-i-specify-multiple-users-for-myself-in-gitconfig
+You can configure an individual repo to use a specific user / email address which overrides the global configuration. From the root of the repo, run
+
+git config user.name "Your Name Here"
+git config user.email your@email.com
+whereas the default user / email is configured in your ~/.gitconfig
+
+git config --global user.name "Your Name Here"
+git config --global user.email your@email.com
+

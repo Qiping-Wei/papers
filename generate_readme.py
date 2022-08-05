@@ -4,11 +4,12 @@ https://docs.github.com/en/github/writing-on-github/getting-started-with-writing
 generate Readme file for github
 """
 
-workspace="C:\\Users\\18178\PycharmProjects\\bibliograph_smart_contract_machine_learning\\"
+workspace="C:\\Users\\18178\PycharmProjects\\bibliography_smart_contract_machine_learning\\"
 input_excel="C:\\Users\\18178\\2021__papers\\smart contracts__machine learning\\smart_contracts_machine_learning.xlsx"
 output_file_name='readMe.md'
 
 import pandas as pd
+import os
 
 # read paper data from an excel
 # df_paper_data=pd.read_excel(paper_dir,sheet_name=0,index_col=None, na_values=['NA'], usecols="A,C:AA")
@@ -24,10 +25,10 @@ df_paper_data= df_paper_data[df_paper_data['year'].notna()]
 df_paper_data = df_paper_data.sort_values(["year", "paper"], ascending = (False, True))
 
 
-
-
 # write to a file
 output_file_path=workspace+output_file_name
+
+
 with open(output_file_path, 'w',encoding='utf8') as f:
     f.write('A bibliography of papers on security and testing of Ethereum smart contracts\n')
     f.write('========\n')
@@ -42,7 +43,7 @@ with open(output_file_path, 'w',encoding='utf8') as f:
         str(row[4]).replace('\n','</br>')+"</details>"
 
         # line="|"+str(i)+"|["+str(row[0]) +"]("+str(row[2])+")|"+str(int(row[1]))+"|"+citation+"|\n"
-        line="|"+str(i)+"|["+row[0] +"]("+row[2]+")|"+str(row[1])+"|"+citation+"|" +abstract +"|\n"
+        line="|"+str(i)+"|["+str(row[0]) +"]("+str(row[2])+")|"+str(row[1])+"|"+citation+"|" +abstract +"|\n"
         f.write(line)
         i+=1
 
